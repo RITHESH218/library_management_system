@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 from datetime import datetime, timedelta
 
 load_dotenv()
-
 url = os.getenv("SUPABASE_URL")
 key = os.getenv("SUPABASE_KEY")
 sb: Client = create_client(url, key)

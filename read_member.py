@@ -1,6 +1,6 @@
 import os
-from supabase import create_client, Client #pip install supabase
-from dotenv import load_dotenv # pip install python-dotenv
+from supabase import create_client, Client 
+from dotenv import load_dotenv 
  
 load_dotenv()
  

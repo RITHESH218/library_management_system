@@ -2,8 +2,7 @@
 When a member returns a book:
 Update the borrow_records.return_date.
 Increase book stock by 1.
-
- 👉 Again, both must happen in a single transaction.'''
+Again, both must happen in a single transaction.'''
 import os
 from supabase import create_client, Client
 from dotenv import load_dotenv
@@ -59,14 +58,12 @@ def return_book(member_id, book_id):
             .execute()
         )
         if not update_stock.data:
-            # Rollback borrow record update
             sb.table("borrow_records").update({"return_date": None}).eq("record_id", record_id).execute()
             print("Failed to update book stock. Rolled back borrow record.")
             return
 
         print("Book returned successfully.")
     except Exception as e:
-        # Rollback borrow record update if any error
         sb.table("borrow_records").update({"return_date": None}).eq("record_id", record_id).execute()
         print("Transaction failed:", str(e))
 
